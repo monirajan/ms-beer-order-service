@@ -64,7 +64,9 @@ public class BeerOrderServiceImpl implements BeerOrderService{
 			beerOrder.setId(null);
 			beerOrder.setCustomer(customerOptional.get());
 			beerOrder.setOrderStatus(OrderStatusEnum.NEW);
+			if(beerOrder.getBeerOrderLines()!=null) {
 			beerOrder.getBeerOrderLines().forEach(line->line.setBeerOrder(beerOrder));		// cross reference
+			}
 			BeerOrder savedBeerOrder = beerOrderRepository.saveAndFlush(beerOrder);
 			
 			//todo impl
